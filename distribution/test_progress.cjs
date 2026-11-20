@@ -1,0 +1,20 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync('dist/engine.js','utf8');
+let draws=0,calls=[];
+const ctx={location:{hostname:'127.0.0.1',origin:'http://127.0.0.1:8765'},sessionStorage:{getItem(){return 'expired'},setItem(){}},AbortSignal,Date,renderJobs(){draws++},render(){},toast(){}};
+vm.createContext(ctx);
+vm.runInContext(source.slice(0,source.indexOf('function engineBanner')),ctx);
+vm.runInContext(source.slice(source.indexOf('async function refreshJobs'),source.indexOf('function mergeAssets')),ctx);
+const response=(status,body)=>({ok:status===200,status,json:async()=>body});
+(async()=>{
+ ctx.fetch=async(url,opts)=>{calls.push(url);if(url.endsWith('/api/session'))return response(200,{token:'renewed'});if(opts.headers.Authorization==='Bearer expired')return response(401,{error:'expired'});return response(200,{jobs:[{id:'running-job',status:'running'}]});};
+ await vm.runInContext('refreshJobs()',ctx);
+ assert.equal(calls.length,3);assert.equal(vm.runInContext('engine.token',ctx),'renewed');assert.equal(draws,1);assert.equal(vm.runInContext('engine.jobs[0].status',ctx),'running');
+ let finish;calls=[];
+ ctx.fetch=(url)=>{calls.push(url);return new Promise(ok=>{finish=()=>ok(response(200,{jobs:[]}));});};
+ const first=vm.runInContext('refreshJobs()',ctx),second=vm.runInContext('refreshJobs()',ctx);assert.equal(calls.length,1);finish();await Promise.all([first,second]);
+ ctx.fetch=async()=>{throw Error('temporary disconnect')};
+ await assert.rejects(vm.runInContext('refreshJobs()',ctx),/temporary/);assert.equal(vm.runInContext('engine.jobsRequest',ctx),null);
+ ctx.fetch=async()=>response(200,{jobs:[{id:'recovered'}]});await vm.runInContext('refreshJobs()',ctx);assert.equal(vm.runInContext('engine.jobs[0].id',ctx),'recovered');
+ console.log('PASS: expired-session renewal, deduplicated polling, transient-disconnect recovery');
+})().catch(error=>{console.error(error);process.exitCode=1});
