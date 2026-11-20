@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CJH · AI剪辑工作台</title><meta name="description" content="让剪辑判断有据可依，让重复操作有章可循。探店与综艺感视频的流程工作台。"><link rel="stylesheet" href="style.css"></head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="#overview"><span class="brand-icon">C<span>◢</span></span><span>CJH STUDIO<small>AI 剪辑工作台</small></span></a>
+  <div class="nav-label">制作空间 <span>WORKSPACE</span></div>
+  <nav id="nav" aria-label="工作台导航"></nav>
+  <div class="sidebar-bottom"><div class="status-dot"></div><strong>浏览器本地工作区</strong><p>视频留在本机。记录自动保存，<br>换设备前请导出备份。</p><button class="text-button" id="backup">↗ 导出项目备份</button><button class="text-button" id="restore">↙ 恢复项目备份</button></div>
+  <div class="sidebar-footer"><span class="avatar">CJ</span><div>剪辑制作中心<small>WORKBENCH / V3.0</small></div></div>
+</aside>
+<div class="shell"><header><div class="breadcrumb">制作空间 <span>/</span> <b id="crumb">项目总览</b></div><div class="header-right"><span id="save-status" role="status">已保存到此浏览器</span><button class="icon-button" id="help" aria-label="使用说明">?</button></div></header>
+<main><div class="heading"><div><div class="eyebrow">MAKE ROOM FOR THE GOOD CUT.</div><h1 id="page-title">把时间留给好内容<span>。</span></h1><p id="page-desc">让 AI 做准备，让剪辑师做决定。每一个判断，都能回到素材。</p></div><button class="primary" id="new-project">＋ 新建项目</button></div>
+<div class="projectbar"><div><span class="mini-label">当前项目</span><select id="project-select" aria-label="选择项目"></select><button class="text-button" id="rename">重命名</button></div><span class="badge neutral">人工辅助 · 引擎待接入</span></div>
+<section id="app" aria-live="polite"></section>
+<footer>为探店与人物故事而建 <span>素材 → 判断 → 执行 → 复盘</span></footer></main></div>
+<dialog id="modal"><form id="modal-form"><div class="dialog-head"><h2 id="modal-title"></h2><button type="button" class="icon-button" id="close-modal" aria-label="关闭">×</button></div><div id="modal-fields"></div><div class="dialog-actions"><button type="button" class="secondary" id="cancel-modal">取消</button><button class="primary" type="submit">保存</button></div></form></dialog>
+<dialog id="preview"><div class="dialog-head"><h2 id="preview-title">素材预览</h2><button class="icon-button" id="close-preview" aria-label="关闭预览">×</button></div><video id="video" controls playsinline></video><p class="muted" id="preview-note"></p></dialog>
+<input type="file" id="media-input" accept="video/*,audio/*,image/*" multiple hidden><input type="file" id="script-input" accept=".txt,.md" hidden><input type="file" id="transcript-input" accept=".srt,.json" hidden><input type="file" id="restore-input" accept=".json" hidden>
+<div class="toast" id="toast" role="status"></div><link rel="stylesheet" href="engine.css"><script src="app.js"></script><script src="engine.js"></script>
+<link rel="stylesheet" href="quick.css?v=20261113-script2"><script src="quick.js?v=20261113-script2"></script><script src="editorial.js?v=20261113-script2"></script>
+<script src="beta.js"></script>
+<link rel="stylesheet" href="intake.css"><script src="intake.js?v=20261113-script2"></script>
+<link rel="stylesheet" href="live.css"><script src="live.js"></script>
+</body></html>

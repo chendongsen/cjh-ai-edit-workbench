@@ -1,0 +1,13 @@
+.batch-drop{border:2px dashed #b5c8c4;border-radius:12px;padding:24px 16px;text-align:center;background:#f4f8f6;transition:background .15s,border-color .15s}
+.batch-drop.dragover{border-color:#226c59;background:#e0f1e9}
+.batch-drop strong{display:block;font-size:17px;margin-bottom:8px}
+.batch-drop .secondary{margin:5px 3px}
+.batch-note{font-size:12px;line-height:1.6;color:#56625d;margin:10px 0}
+.batch-paths,.batch-script{margin-top:16px}
+.batch-paths textarea,.batch-script textarea{margin:8px 0;width:100%;box-sizing:border-box}
+#batch-progress{overflow-wrap:anywhere;font-size:13px;line-height:1.7;margin:10px 0}
+#batch-progress progress{width:100%;accent-color:#226c59}
+.batch-status{padding:10px 0;border-bottom:1px solid #e2e8e4}
+.batch-warnings{font-size:12px;line-height:1.6;color:#785228;padding:8px 0;overflow-wrap:anywhere}
+.batch-script select{width:100%;margin:8px 0}
+.batch-drop:focus-visible{outline:3px solid #226c59;outline-offset:3px}
