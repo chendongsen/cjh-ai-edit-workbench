@@ -1,0 +1,4 @@
+# Optional local ensemble; no paid inference service.
+transformers==4.57.1
+mediapipe==0.10.21
+numpy==1.26.4

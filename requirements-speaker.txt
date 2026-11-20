@@ -1,0 +1,5 @@
+# Optional local 3D-Speaker audition engine; no hosted inference.
+torch==2.8.0
+torchaudio==2.8.0
+sherpa-onnx==1.13.8
+pypinyin==0.55.0

@@ -1,0 +1,5 @@
+# Install into an independent Apple Silicon Python environment.
+# Do not install these into the packaged editor runtime.
+mlx-vlm==0.7.12
+mlx-audio==0.6.5
+imageio-ffmpeg==0.6.0
